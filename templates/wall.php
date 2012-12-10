@@ -10,7 +10,7 @@
 
         echo '<ul class="images">';
         foreach($wall->getImages() as $i) {
-            echo '<li><a title="' . $i->title . '" href="?wall=' . $wall->slug . '&page=' . $i->id . '"><img src="' . $i->file . '" /></li>';
+            echo '<li><a title="' . $i->title . '" href="?wall=' . $wall->slug . '&page=' . $i->id . '"><img src="' . $i->thumbnail . '" /></li>';
         }
         echo '</ul>';
     }

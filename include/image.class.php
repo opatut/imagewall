@@ -41,6 +41,7 @@
             // move the temporary file to its destiny
             global $config;
             $this->file = $config["file/uploads"] . "/" . $wall->slug . "/" . $this->id . "." . $extension;
+            $this->thumbnail = $config["file/uploads"] . "/" . $wall->slug . "/" . $this->id . "-152." . $extension;
 
             if(!move_uploaded_file($tmpName, ensure_file($this->file))) {
                 $this->delete();
@@ -50,8 +51,11 @@
 
             $this->save();
 
-            // TODO: Convert to thumbnail size
-            $this->thumbnail = $this->file;
+            // Convert to thumbnail size
+            $img = new Imagick($this->file);
+            $img->cropThumbnailImage(152,152);
+            $img->setImagePage(0, 0, 0, 0);
+            $img->writeImage(ensure_file($this->thumbnail));
 
             return UPLOAD_OK;
         }
