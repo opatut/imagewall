@@ -1,5 +1,5 @@
 <?php
-    if($wall->showRequiresPassword and !$wall->hasAccess()) {
+    if($wall->uploadRequiresPassword and !$wall->hasAccess()) {
         $mode = "upload";
         include("templates/wall-unlock.php");
     } else {
