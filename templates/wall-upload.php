@@ -26,7 +26,7 @@
                 } elseif($result == UPLOAD_FAILED_TO_MOVE) {
                     $errors["file"] = "Die Datei konnte nicht hochgeladen werden :(";
                 } elseif($result == UPLOAD_OK) {
-                    header("Refresh: 1.5;url=?wall=" . $wall->slug);
+                    header("Refresh: 3;url=?wall=" . $wall->slug);
                 }
             }
         }
@@ -59,6 +59,8 @@
         </form>
         <?php
         } else {
+             echo '<ul class="images"><li style="margin-right: 20px;"><a href="?wall=' . $wall->slug . '&page=' . $image->id . '"><img src="' . $image->thumbnail . '"></a></li></ul>';
+
             echo '<p>Erfolgreich hochgeladen. Du wirst zur Imagewall weitergeleitet...</p>';
             echo '<p><a href="?wall=' . $wall->slug . '">Bring mich sofort dorthin!</a></p>';
         }
