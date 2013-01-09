@@ -30,4 +30,19 @@
             return Image::query("WHERE wall_id = ? ORDER BY date DESC LIMIT " . intval($count), $this->id);
         }
     }
+
+    function encodeImageData($images) {
+        $data = Array();
+        foreach($images as $i) {
+            $data[] = Array(
+                "file" => $i->file,
+                "title" => $i->title,
+                "description" => $i->description,
+                "url" => "?wall=" . $i->getWall()->slug . "&page=" . $i->id,
+                "author" => $i->author,
+                "date" => $i->date
+            );
+        }
+        return json_encode($data);
+    }
 ?>

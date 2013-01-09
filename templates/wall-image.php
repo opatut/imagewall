@@ -10,16 +10,16 @@
             <a href="<?php echo $image->file; ?>" class="btn">Bild herunterladen</a>
         </p>
         <table>
-            <tr><th>Titel</th><td><?php echo $image->title; ?></td></tr>
-            <tr><th>Hochgeladen am</th><td><?php echo $image->date; ?></td></tr>
+            <tr><th class="nobr">Titel</th><td><?php echo $image->title; ?></td></tr>
+            <tr><th class="nobr">Hochgeladen am</th><td><?php echo $image->date; ?></td></tr>
 
             <?php if($image->author) { ?>
-            <tr><th>Hochgeladen von</th><td><?php echo $image->author; ?></td></tr>
+            <tr><th class="nobr">Hochgeladen von</th><td><?php echo $image->author; ?></td></tr>
             <?php } ?>
 
             <?php if($image->description) { ?>
-            <tr><th>Beschreibung</th><td>
-                <p><?php echo $image->description; ?></p>
+            <tr><th class="nobr">Beschreibung</th><td>
+                <?php echo $image->description; ?>
             </td></tr>
             <?php } ?>
         </table>

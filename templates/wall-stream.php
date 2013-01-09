@@ -3,20 +3,8 @@
         $mode = "show";
         include("templates/wall-unlock.php");
     } else {
-        $data = Array();
-        foreach($wall->getRecentImages(3) as $i) {
-            $data[] = Array(
-                "file" => $i->file,
-                "title" => $i->title,
-                "description" => $i->description,
-                "url" => "?wall=" . $wall->slug . "&page=" . $i->id,
-                "author" => $i->author,
-                "date" => $i->date
-            );
-        }
-
         echo "\n\n";
-        echo '<script>var imageData = ' . json_encode($data) . ';</script>';
+        echo '<script>var imageData = ' . encodeImageData($wall->getRecentImages(3)) . ';</script>';
         echo "\n\n";
         ?>
 
@@ -29,7 +17,7 @@
         </noscript>
 
         <div id="stream">
-            <div id="slide" style="display: none;" class="slide">
+            <div id="slide" class="slide">
                 <div class="image-row"><div class="image">
                     <img src="" style="display: none;" />
                 </div></div>
@@ -43,8 +31,54 @@
                 </div>
             </div>
 
+            <div id="top-3" class="top-3">
+                <div id="top-3-row">
+                    <div id="top-3-left">
+                        <div id="top-3-1" class="top-3-image">
+                            <img src="gfx/spinner.gif">
+                            <div class="meta">
+                                <div class="title"></div>
+                                <div class="description">
+                                    <span></span>
+                                    <span class="author"></span>
+                                    <span class="date"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="top-3-right">
+                        <div id="top-3-2" class="top-3-image">
+                            <img src="gfx/spinner.gif">
+                            <div class="meta">
+                                <div class="title"></div>
+                                <div class="description">
+                                    <span></span>
+                                    <span class="author"></span>
+                                    <span class="date"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="top-3-3" class="top-3-image">
+                            <img src="gfx/spinner.gif">
+                            <div class="meta">
+                                <div class="title"></div>
+                                <div class="description">
+                                    <span></span>
+                                    <span class="author"></span>
+                                    <span class="date"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="menu">
                 <a href="?wall=<?php echo $wall->slug; ?>" class="btn">&laquo; Zurück zur Wall</a>
+                <select size="1" class="btn" id="mode-select">
+                    <option value="top-3">Top 3</option>
+                    <option value="slide">Slideshow</option>
+                </select>
             </div>
         </div>
 

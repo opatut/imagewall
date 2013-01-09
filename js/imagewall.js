@@ -1,6 +1,7 @@
 var currentImage = 0;
 var shuffleMode = false;
 var fadeTime = 1000;
+var currentMode = "top-3";
 
 function nextImage() {
     if(shuffleMode) {
@@ -32,22 +33,48 @@ function setImageData(data) {
     oldSlide.animate({"left": "-10%", "opacity": 0}, fadeTime);
 
     newSlide.find(".image img").attr("src", data.file).show();
+    setMetadata(newSlide.find(".meta"), data);
+}
 
-    newSlide.find(".meta .title").text(data.title);
+function setMetadata(metabox, data) {
+    metabox.find(".title").text(data.title);
 
     if(data.description) {
-        newSlide.find(".meta .description span:first-child").html(data.description + " &mdash; ");
+        metabox.find(".description span:first-child").html(data.description + " &mdash; ");
     } else {
-        newSlide.find(".meta .description span:first-child").html("");
+        metabox.find(".description span:first-child").html("");
     }
 
     if(data.author) {
-        newSlide.find(".meta .author").text("von " + data.author);
+        metabox.find(".author").text("von " + data.author);
     } else {
-        newSlide.find(".meta .author").text("");
+        metabox.find(".author").text("");
     }
 
-    newSlide.find(".meta .date").text(data.date);
+    metabox.find(".date").text(data.date);
+}
+
+function updateTop3() {
+    $("#top-3-1 img").attr("src", imageData[0].file);
+    setMetadata($("#top-3-1 .meta"), imageData[0]);
+
+    $("#top-3-2 img").attr("src", imageData[1].file);
+    setMetadata($("#top-3-2 .meta"), imageData[1]);
+
+    $("#top-3-3 img").attr("src", imageData[2].file);
+    setMetadata($("#top-3-3 .meta"), imageData[2]);
+}
+
+function setStreamMode(mode) {
+    if(mode == "slide") {
+        $("#stream > div:not(.menu)").hide();
+        $(".slide").show();
+    } else if(mode == "top-3") {
+        $(".slide").hide();
+        $("#top-3").show();
+        updateTop3();
+    }
+    currentMode = mode;
 }
 
 function slideCountdown() {
@@ -55,11 +82,31 @@ function slideCountdown() {
     setTimeout('slideCountdown()', 10000);
 }
 
+function updateImageData() {
+    $.ajax({
+        url: "ajax.php",
+        data: "node=recent-images&wall=" + currentWall,
+        dataType: "json",
+        cache: false,
+        success: function(data) {
+            imageData = data;
+            setStreamMode(currentMode);
+        }
+    });
+}
+
 $(document).ready(function() {
     // slideshow
     if(imageData) {
-        $(".slide").show();
         $(this).click(nextImage);
+
+        setStreamMode(currentMode);
         slideCountdown();
+
+        setInterval("updateImageData()", 5000);
     }
+
+    $("#mode-select").change(function() {
+        setStreamMode($(this).val());
+    });
 });

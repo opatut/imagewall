@@ -39,6 +39,7 @@ table {
 td, th {
     text-align: left;
     padding: 10px 20px;
+    vertical-align: top;
 }
 
 tr:nth-child(2n+1) {
@@ -52,6 +53,10 @@ p, ul {
 
 ul {
     list-style: square;
+}
+
+.nobr {
+    white-space: nowrap;
 }
 
 #header,
@@ -158,11 +163,12 @@ ul.images li.big {
 }
 
 #stream,
+#top-3,
 .slide {
     position: absolute;
     left: 0;
     top: 0;
-    width: 100%;
+    right: 0;
     height: 100%;
     background: #000;
     overflow: hidden;
@@ -171,7 +177,7 @@ ul.images li.big {
 .slide .image {
     position: absolute;
     left: 0px;
-    top: 00px;
+    top: 0px;
     right: 0px;
     bottom: 0px;
     text-align: center;
@@ -183,7 +189,7 @@ ul.images li.big {
     max-width: 100%;
 }
 
-.slide .meta,
+#stream .meta,
 #stream .menu {
     position: absolute;
     left: 0px;
@@ -196,19 +202,125 @@ ul.images li.big {
     top: 0px;
 }
 
-.slide .meta {
+#stream .meta {
     bottom: 0px;
     background: rgba(0, 0, 0, 0.8);
 }
 
-.slide .meta .title {
+#top-3 .meta {
+    font-size: 0.8em;
+}
+
+#stream .meta .title {
     font-size: 1.3em;
     font-weight: bold;
     margin-right: 10px;
 }
 
-.slide .meta .description {
+#stream .meta .description {
     color: rgba(255, 255, 255, 0.5);
+}
+
+.top-3-image {
+    /*background: rgba(255, 255, 255, 0.2);*/
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: 10px;
+    /*padding: 10px;*/
+
+    /* Firefox */
+    display:-moz-box;
+    -moz-box-orient:horizontal;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+
+    /* Safari and Chrome */
+    display:-webkit-box;
+    -webkit-box-orient:horizontal;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+
+    /* W3C */
+    display:box;
+    box-orient:horizontal;
+    box-pack:center;
+    box-align:center;
+}
+/*
+.top-3-image div.center-1 {
+    height: 100%;
+    width: 100%;
+    display: table;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.top-3-image div.center-2 {
+    display: table-row;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.top-3-image div.center-3 {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    table-layout: fixed;
+    white-space: nowrap;
+}
+*/
+
+.top-3-image img {
+    /*vertical-align: middle;*/
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#top-3-1 {
+    margin-right: 0;
+}
+#top-3-3 {
+    top: 50%;
+    margin-top: 5px;
+}
+#top-3-2 {
+    bottom: 50%;
+    margin-bottom: 5px;
+}
+
+#top-3 {
+    padding-top: 40px;
+    display: table;
+    width: 100%;
+}
+
+#top-3-row {
+    width: 100%;
+    height: 100%;
+    display: table-row;
+}
+
+#top-3-row > div {
+    display: table-cell;
+}
+
+#top-3-left {
+    width: 66%;
+    height: 100%;
+    position: relative;
+}
+
+#top-3-right {
+    width: 34%;
+    position: relative;
 }
 
 .fullsize {
@@ -218,6 +330,10 @@ ul.images li.big {
 
 .fullsize img {
     max-width: 100%;
+}
+
+select.btn {
+    padding: 3px 10px;
 }
 
 /* FROM BOOTSTRAP! */

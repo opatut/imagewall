@@ -20,6 +20,10 @@
             $thumbnail = "",
             $date = null;
 
+        public function getWall() {
+            return Wall::get($this->wall_id);
+        }
+
         public function upload($wall, $title, $description, $author, $fileInfo) {
             $tmpName = $fileInfo["tmp_name"];
             $originalName = basename($fileInfo["name"]);
